@@ -1,0 +1,33 @@
+﻿@model IEnumerable<OnlineShopping_csit.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+.table{
+ display:flex;
+ justify-content:center;
+ align-items: center;
+ flex-direction:column;
+ border:1px solid black;
+}
+
+</style>
+
+<h1> Product Dashboard</h1>
+
+<table class="table">
+  
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="table">
+                <img src="Images/@item.Image" width="100" height="80" alt="images" />
+               <p>Title:</p> @Html.DisplayFor(modelItem =>  item.Title)
+               <p>Price:</p> @Html.DisplayFor(modelItem => item.Price)
+               <p>Description:</p> @Html.DisplayFor(modelItem => item.Description)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

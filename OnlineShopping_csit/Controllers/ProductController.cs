@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using OnlineShopping_csit.Models;
 
 namespace OnlineShopping_csit.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly OnlineShopping_csitContext _context;
@@ -21,6 +23,11 @@ namespace OnlineShopping_csit.Controllers
 
         // GET: Product
         public async Task<IActionResult> Index()
+        {
+            var onlineShopping_csitContext = _context.Product.Include(p => p.Category);
+            return View(await onlineShopping_csitContext.ToListAsync());
+        }
+        public async Task<IActionResult> ProductList()
         {
             var onlineShopping_csitContext = _context.Product.Include(p => p.Category);
             return View(await onlineShopping_csitContext.ToListAsync());

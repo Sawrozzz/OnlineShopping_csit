@@ -16,5 +16,6 @@ namespace OnlineShopping_csit.Data
 
         public DbSet<Category> Category { get; set; } = default!;
         public DbSet<Product> Product { get; set; } = default!;
+        public DbSet<OnlineShopping_csit.Models.User> User { get; set; } = default!;
     }
 }
