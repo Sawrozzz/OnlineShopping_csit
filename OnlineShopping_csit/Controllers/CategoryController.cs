@@ -11,7 +11,7 @@ using OnlineShopping_csit.Models;
 
 namespace OnlineShopping_csit.Controllers
 {
-    [Authorize(Roles = "Normal")]
+    [Authorize(Roles = "admin")]
     public class CategoryController : Controller
     {
         private readonly OnlineShopping_csitContext _context;

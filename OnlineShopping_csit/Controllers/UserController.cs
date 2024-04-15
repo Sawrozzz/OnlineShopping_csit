@@ -19,6 +19,8 @@ namespace OnlineShopping_csit.Controllers
     {
         private readonly OnlineShopping_csitContext _context;
 
+        public object FormsAuthentication { get; private set; }
+
         public UserController(OnlineShopping_csitContext context)
         {
             _context = context;
@@ -110,6 +112,8 @@ namespace OnlineShopping_csit.Controllers
         {
             return View();
         }
+   
+
 
         // POST: User/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -143,6 +147,14 @@ namespace OnlineShopping_csit.Controllers
             }
             return View(user);
         }
+        [AllowAnonymous]
+        public async Task<IActionResult> Logout([Bind("Id,Email,Password,UserType")] User user)
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "User");
+        }
+
+
         // GET: User/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
