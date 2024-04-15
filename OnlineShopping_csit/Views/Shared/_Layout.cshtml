@@ -25,6 +25,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if(User.Identity.IsAuthenticated)
+                        {
+                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Manage Category</a>
                         </li>
@@ -34,12 +37,26 @@
                              <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Manage User</a>
                         </li>
+                        }
                     </ul>
                 </div>
-                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+           
+                
+                @{
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Logout</a>
 
-                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
+                    }
+                    else
+                    {
 
+                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+
+                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
+
+                    }
+                }
             </div>
         </nav>
     </header>

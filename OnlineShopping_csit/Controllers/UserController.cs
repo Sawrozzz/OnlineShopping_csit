@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,9 +10,11 @@ using OnlineShopping_csit.Data;
 using OnlineShopping_csit.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopping_csit.Controllers
 {
+    [Authorize (Roles = "admin")]
     public class UserController : Controller
     {
         private readonly OnlineShopping_csitContext _context;
@@ -71,6 +72,7 @@ namespace OnlineShopping_csit.Controllers
 
 
         // GET: User/Create
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
@@ -81,6 +83,8 @@ namespace OnlineShopping_csit.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+       
         public async Task<IActionResult> Register([Bind("Id,Email,Password,UserType")] User user)
         {
             if (ModelState.IsValid)
@@ -101,6 +105,7 @@ namespace OnlineShopping_csit.Controllers
             }
             return View(user);
         }
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
@@ -109,6 +114,7 @@ namespace OnlineShopping_csit.Controllers
         // POST: User/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([Bind("Id,Email,Password,UserType")] User user)

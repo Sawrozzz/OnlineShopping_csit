@@ -11,7 +11,7 @@ using OnlineShopping_csit.Models;
 
 namespace OnlineShopping_csit.Controllers
 {
-    [Authorize]
+    [Authorize (Roles ="Normal")]
     public class ProductController : Controller
     {
         private readonly OnlineShopping_csitContext _context;
@@ -27,6 +27,7 @@ namespace OnlineShopping_csit.Controllers
             var onlineShopping_csitContext = _context.Product.Include(p => p.Category);
             return View(await onlineShopping_csitContext.ToListAsync());
         }
+        [AllowAnonymous]
         public async Task<IActionResult> ProductList()
         {
             var onlineShopping_csitContext = _context.Product.Include(p => p.Category);
