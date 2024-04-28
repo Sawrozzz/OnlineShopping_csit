@@ -7,7 +7,7 @@ namespace OnlineShopping_API.Controllers;
 
 public static class ProductEndpoints
 {
-    public static void MapProductEndpoints (this IEndpointRouteBuilder routes)
+    public static  void MapProductEndpoints (this IEndpointRouteBuilder routes)
     {
         var group = routes.MapGroup("/api/Product").WithTags(nameof(Product));
 
